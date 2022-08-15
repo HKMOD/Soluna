@@ -58,6 +58,13 @@ minecraft.run {
             property("forge.logging.console.level", "debug")
 
             property("forge.enabledGameTestNamespaces", modid)
+
+            property("terminal.jline", "true")
+
+            args(
+                "-Dlog4j.configurationFile=log4j2.xml"
+            )
+
             mods {
                 create(modid) {
                     source(sourceSets.main.get())
@@ -72,6 +79,9 @@ minecraft.run {
             property("forge.logging.console.level", "debug")
 
             property("forge.enabledGameTestNamespaces", modid)
+
+            property("terminal.jline", "true")
+
             mods {
                 create(modid) {
                     source(sourceSets.main.get())
@@ -88,6 +98,8 @@ minecraft.run {
 
             property("forge.enabledGameTestNamespaces", modid)
 
+            property("terminal.jline", "true")
+
             mods {
                 create(modid) {
                     source(sourceSets.main.get())
@@ -100,6 +112,8 @@ minecraft.run {
             property("forge.logging.markers", "REGISTRIES")
 
             property("forge.logging.console.level", "debug")
+
+            property("terminal.jline", "true")
 
             args(
                 "--mod",
