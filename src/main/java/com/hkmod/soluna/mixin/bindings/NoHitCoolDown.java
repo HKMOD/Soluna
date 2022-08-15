@@ -1,4 +1,4 @@
-package com.pleahmacaka.examplemod.mixin.bindings;
+package com.hkmod.soluna.mixin.bindings;
 
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;

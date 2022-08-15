@@ -1,6 +1,6 @@
-package com.pleahmacaka.examplemod.common.util
+package com.hkmod.soluna.common.util
 
-import com.pleahmacaka.examplemod.MODID
+import com.hkmod.soluna.MODID
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 

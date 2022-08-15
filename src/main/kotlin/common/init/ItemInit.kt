@@ -1,6 +1,6 @@
-package com.pleahmacaka.examplemod.common.init
+package com.hkmod.soluna.common.init
 
-import com.pleahmacaka.examplemod.MODID
+import com.hkmod.soluna.MODID
 import net.minecraft.world.item.Item
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister

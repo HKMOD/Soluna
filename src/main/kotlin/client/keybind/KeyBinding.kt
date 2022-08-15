@@ -1,4 +1,4 @@
-package com.pleahmacaka.examplemod.client.keybind
+package com.hkmod.soluna.client.keybind
 
 import net.minecraft.client.KeyMapping
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent

@@ -1,8 +1,8 @@
-package com.pleahmacaka.examplemod
+package com.hkmod.soluna
 
-import com.pleahmacaka.examplemod.common.init.BlockInit
-import com.pleahmacaka.examplemod.common.init.ItemInit
-import com.pleahmacaka.examplemod.common.init.SolunaTab
+import com.hkmod.soluna.common.init.BlockInit
+import com.hkmod.soluna.common.init.ItemInit
+import com.hkmod.soluna.common.init.SolunaTab
 import net.minecraftforge.fml.common.Mod
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager

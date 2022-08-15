@@ -1,6 +1,6 @@
-package com.pleahmacaka.examplemod.common.init
+package com.hkmod.soluna.common.init
 
-import com.pleahmacaka.examplemod.MODID
+import com.hkmod.soluna.MODID
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
