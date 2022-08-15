@@ -16,7 +16,7 @@ buildscript {
 
 apply(plugin = "kotlin")
 apply(plugin = "org.spongepowered.mixin")
-apply(from = "https://raw.githubusercontent.com/thedarkcolour/KotlinForForge/site/thedarkcolour/kotlinforforge/gradle/kff-3.7.0.gradle")
+apply(from = "https://raw.githubusercontent.com/thedarkcolour/KotlinForForge/site/thedarkcolour/kotlinforforge/gradle/kff-3.7.1.gradle")
 
 plugins {
     eclipse
@@ -26,8 +26,9 @@ plugins {
     id("org.parchmentmc.librarian.forgegradle") version "1.+"
 }
 
-version = "1.19-0.0.5.0"
-group = "com.pleahmacaka"
+version = "1.19.2-0.0.5.0"
+group = "hkmod"
+val modid = "soluna"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
@@ -36,8 +37,6 @@ println(
         "java.vendor"
     ) + ") Arch: " + System.getProperty("os.arch")
 )
-
-jarJar.enable()
 
 val Project.minecraft: MinecraftExtension
     get() = extensions.getByType()
@@ -58,9 +57,9 @@ minecraft.run {
 
             property("forge.logging.console.level", "debug")
 
-            property("forge.enabledGameTestNamespaces", "examplemod")
+            property("forge.enabledGameTestNamespaces", modid)
             mods {
-                create("examplemod") {
+                create(modid) {
                     source(sourceSets.main.get())
                 }
             }
@@ -72,9 +71,9 @@ minecraft.run {
 
             property("forge.logging.console.level", "debug")
 
-            property("forge.enabledGameTestNamespaces", "examplemod")
+            property("forge.enabledGameTestNamespaces", modid)
             mods {
-                create("examplemod") {
+                create(modid) {
                     source(sourceSets.main.get())
                 }
             }
@@ -87,10 +86,10 @@ minecraft.run {
 
             property("forge.logging.console.level", "debug")
 
-            property("forge.enabledGameTestNamespaces", "examplemod")
+            property("forge.enabledGameTestNamespaces", modid)
 
             mods {
-                create("examplemod") {
+                create(modid) {
                     source(sourceSets.main.get())
                 }
             }
@@ -104,7 +103,7 @@ minecraft.run {
 
             args(
                 "--mod",
-                "examplemod",
+                modid,
                 "--all",
                 "--output",
                 file("src/generated/resources/"),
@@ -112,9 +111,17 @@ minecraft.run {
                 file("src/main/resources")
             )
             mods {
-                create("examplemod") {
+                create(modid) {
                     source(sourceSets.main.get())
                 }
+            }
+        }
+
+        all {
+            lazyToken("minecraft_classpath") {
+                val joined = configurations.getByName("library").copyRecursive().resolve()
+                    .joinToString(File.pathSeparator) { it.absolutePath }
+                return@lazyToken joined
             }
         }
     }
@@ -124,15 +131,6 @@ configurations {
     val library = maybeCreate("library")
     implementation.configure {
         extendsFrom(library)
-    }
-}
-
-minecraft.runs.all {
-    lazyToken("minecraft_classpath") {
-        val joined = configurations.getByName("library").copyRecursive().resolve()
-            .joinToString(File.pathSeparator) { it.absolutePath }
-        println(joined)
-        return@lazyToken joined
     }
 }
 
@@ -153,8 +151,6 @@ dependencies {
     minecraft("net.minecraftforge:forge:1.19.2-43.0.11")
 
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
-
-    implementation(group = "thedarkcolour", name = "kfflib", version = "3.7.0")
 }
 
 sourceSets.main.configure {
@@ -162,15 +158,15 @@ sourceSets.main.configure {
 }
 
 tasks.withType<Jar> {
-    archiveBaseName.set("examplemod")
+    archiveBaseName.set(modid)
     manifest {
         val map = HashMap<String, String>()
-        map["Specification-Title"] = "examplemod"
-        map["Specification-Vendor"] = "pleahmacaka"
+        map["Specification-Title"] = modid
+        map["Specification-Vendor"] = "tmvkrpxl0, pleahmacaka"
         map["Specification-Version"] = "1"
         map["Implementation-Title"] = project.name
         map["Implementation-Version"] = archiveBaseName.get()
-        map["Implementation-Vendor"] = "pleahmacaka"
+        map["Implementation-Vendor"] = "tmvkrpxl0, pleahmacaka"
         map["Implementation-Timestamp"] = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(Date())
         attributes(map)
     }
