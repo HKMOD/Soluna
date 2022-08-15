@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 const val MODID = "soluna"
+
 @Mod(MODID)
 object ExampleMod {
     private val LOGGER: Logger = LogManager.getLogger()
