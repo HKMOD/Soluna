@@ -12,7 +12,7 @@ import thedarkcolour.kotlinforforge.forge.MOD_BUS
 const val MODID = "soluna"
 
 @Mod(MODID)
-object ExampleMod {
+object Soluna {
     private val LOGGER: Logger = LogManager.getLogger()
 
     init {

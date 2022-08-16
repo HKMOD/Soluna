@@ -1,6 +1,4 @@
 import net.minecraftforge.gradle.common.util.MinecraftExtension
-import org.spongepowered.asm.gradle.plugins.MixinExtension
-import org.spongepowered.asm.gradle.plugins.struct.DynamicProperties
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,12 +8,10 @@ buildscript {
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0")
-        classpath("org.spongepowered:mixingradle:0.7.+")
     }
 }
 
 apply(plugin = "kotlin")
-apply(plugin = "org.spongepowered.mixin")
 apply(from = "https://raw.githubusercontent.com/thedarkcolour/KotlinForForge/site/thedarkcolour/kotlinforforge/gradle/kff-3.7.1.gradle")
 
 plugins {
@@ -39,9 +35,6 @@ println(
 )
 
 val Project.minecraft: MinecraftExtension
-    get() = extensions.getByType()
-
-val Project.mixin: MixinExtension
     get() = extensions.getByType()
 
 minecraft.run {
@@ -148,23 +141,12 @@ configurations {
     }
 }
 
-mixin.run {
-    add(sourceSets.main.get(), "examplemod.mixins.refmap.json")
-    config("examplemod.mixins.json")
-    val debug = this.debug as DynamicProperties
-    debug.setProperty("verbose", true)
-    debug.setProperty("export", true)
-    setDebug(debug)
-}
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
     minecraft("net.minecraftforge:forge:1.19.2-43.0.11")
-
-    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 }
 
 sourceSets.main.configure {
@@ -184,7 +166,7 @@ tasks.withType<Jar> {
         map["Implementation-Timestamp"] = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(Date())
         attributes(map)
     }
-    finalizedBy("reobfJar")
+    // finalizedBy("reobfJar")
 }
 
 fun DependencyHandler.minecraft(
