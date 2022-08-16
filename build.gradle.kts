@@ -54,9 +54,7 @@ minecraft.run {
 
             property("terminal.jline", "true")
 
-            args(
-                "-Dlog4j.configurationFile=log4j2.xml"
-            )
+            property("log4j.configurationFile", "log4j2.xml")
 
             mods {
                 create(modid) {

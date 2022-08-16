@@ -1,4 +1,5 @@
 .idea
 .gradle
 build
-run
+run/**
+!run/log4j2.xml
