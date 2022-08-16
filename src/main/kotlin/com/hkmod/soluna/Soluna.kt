@@ -1,5 +1,6 @@
 package com.hkmod.soluna
 
+import com.hkmod.soluna.client.keybind.KeyBindings
 import com.hkmod.soluna.common.init.BlockInit
 import com.hkmod.soluna.common.init.ItemInit
 import com.hkmod.soluna.common.init.SolunaTab
@@ -21,5 +22,7 @@ object Soluna {
         ItemInit.register(MOD_BUS)
         BlockInit.register(MOD_BUS)
         SolunaTab
+
+        MOD_BUS.addListener(KeyBindings::registerKeybindings)
     }
 }

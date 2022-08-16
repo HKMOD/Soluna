@@ -3,7 +3,7 @@ package com.hkmod.soluna.client.keybind
 import net.minecraft.client.KeyMapping
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent
 
-object KeyBinding {
+object KeyBindings {
 
     private const val CATEGORY = "key.categories.soluna"
 

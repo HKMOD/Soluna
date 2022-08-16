@@ -1,6 +1,6 @@
 package com.hkmod.soluna.client.keybind
 
-import com.hkmod.soluna.client.keybind.KeyBinding.KEYBINDINGS
+import com.hkmod.soluna.client.keybind.KeyBindings.KEYBINDINGS
 import net.minecraft.client.KeyMapping
 import net.minecraft.client.Minecraft
 import net.minecraft.client.player.LocalPlayer
