@@ -18,8 +18,8 @@ object SolunaBlocks {
     private val BLOCKS: DeferredRegister<Block> = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID)
     private val BLOCK_ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, MODID)
 
-    val RESEARCH_TABLE: Block by registerBlockAndItem("research_table") {
-        ResearchTable(BlockBehaviour.Properties.copy(Blocks.LECTERN).noOcclusion())
+    val ANALYSIS_TABLE: Block by registerBlockAndItem("analysis_table") {
+        AnalysisTable(BlockBehaviour.Properties.copy(Blocks.LECTERN).noOcclusion())
     }
 
     private fun registerBlockAndItem(name: String, supplier: () -> Block): ReadOnlyProperty<Any?, Block> {

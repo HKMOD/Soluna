@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "soluna:block/analysis_table"
+    }
+  }
+}
