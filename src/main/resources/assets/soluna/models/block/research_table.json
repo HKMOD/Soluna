@@ -1,6 +1,7 @@
 {
     "credit": "Made with Blockbench",
     "parent": "block/block",
+    "render_type": "translucent",
     "textures": {
         "4": "soluna:block/research_table/sheet",
         "6": "soluna:block/research_table/glass_a",
