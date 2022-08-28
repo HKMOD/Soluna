@@ -5,7 +5,8 @@
     "base": {
       "parent": "soluna:block/analysis_table_base"
     },
-    "feature": {
+    "feather": {
+      "render_type": "cutout",
       "parent": "minecraft:item/feather",
       "transform": {
         "origin": [0.5,1.55,0.6]
