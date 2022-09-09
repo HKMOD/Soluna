@@ -1,7 +1,9 @@
 package com.hkmod.soluna
 
 import com.hkmod.soluna.client.keybind.KeyBindings
+import com.hkmod.soluna.client.renderer.registerRenderers
 import com.hkmod.soluna.common.blocks.SolunaBlocks
+import com.hkmod.soluna.common.blocks.entity.SolunaBlockEntities
 import com.hkmod.soluna.common.items.SolunaItems
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.ItemStack
@@ -24,9 +26,11 @@ object Soluna {
 
         SolunaItems.registerItems(MOD_BUS)
         SolunaBlocks.registerBlocks(MOD_BUS)
+        SolunaBlockEntities.registerBEs(MOD_BUS)
 
         if (DIST.isClient) {
             MOD_BUS.addListener(KeyBindings::registerKeybindings)
+            MOD_BUS.addListener(::registerRenderers)
         }
     }
 }
