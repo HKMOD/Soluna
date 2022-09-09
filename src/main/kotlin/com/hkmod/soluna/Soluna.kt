@@ -19,7 +19,7 @@ const val MODID = "soluna"
 
 @Mod(MODID)
 object Soluna {
-    private val LOGGER: Logger = LogManager.getLogger()
+    val LOGGER: Logger = LogManager.getLogger()
 
     init {
         LOGGER.log(Level.INFO, "$MODID has started!")

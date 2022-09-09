@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "soluna:block/analysis_table",
+      "y": 90
+    },
+    "facing=north": {
       "model": "soluna:block/analysis_table"
+    },
+    "facing=south": {
+      "model": "soluna:block/analysis_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "soluna:block/analysis_table",
+      "y": 270
     }
   }
 }
