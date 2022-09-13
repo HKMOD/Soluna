@@ -2,7 +2,6 @@ package com.hkmod.soluna.common.blocks
 
 import com.hkmod.soluna.MODID
 import com.hkmod.soluna.SolunaTab
-import com.hkmod.soluna.common.util.resource
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
@@ -22,11 +21,13 @@ object SolunaBlocks {
         AnalysisTable(BlockBehaviour.Properties.copy(Blocks.LECTERN))
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun registerBlockAndItem(name: String, supplier: () -> Block): ReadOnlyProperty<Any?, Block> {
+        val futureBlock = BLOCKS.registerObject(name, supplier)
         BLOCK_ITEMS.register(name) {
-            BlockItem(ForgeRegistries.BLOCKS.getValue(name.resource)!!, Item.Properties().tab(SolunaTab))
+            BlockItem((futureBlock as () -> Block)(), Item.Properties().tab(SolunaTab))
         }
-        return BLOCKS.registerObject(name, supplier)
+        return futureBlock
     }
     fun registerBlocks(bus: IEventBus) {
         BLOCKS.register(bus)
