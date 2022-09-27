@@ -1,7 +1,7 @@
 package com.hkmod.soluna.common.blocks
 
 import com.hkmod.soluna.MODID
-import com.hkmod.soluna.SolunaTab
+import com.hkmod.soluna.common.items.SolunaTab
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block

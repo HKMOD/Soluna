@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "e": {
+      "item": "minecraft:leather"
+    },
+    "f": {
+      "item": "minecraft:feather"
+    },
+    "i": {
+      "item": "minecraft:ink_sac"
+    },
+    "l": {
+      "item": "minecraft:lectern"
+    }
+  },
+  "pattern": [
+    "e  ",
+    "li ",
+    "f  "
+  ],
+  "result": {
+    "item": "soluna:analysis_table"
+  }
+}
