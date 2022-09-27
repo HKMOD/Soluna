@@ -27,7 +27,7 @@ class AnalysisTableEntity(type: BlockEntityType<AnalysisTableEntity>, pos: Block
         override fun onContentsChanged(slot: Int) {
             super.onContentsChanged(slot)
             setChanged()
-            if (level?.isClientSide == false) {
+            if (!isRemoved && level?.isClientSide == false) {
                 level!!.setBlockAndUpdate(pos, state.setValue(AnalysisTable.HAS_BOOK, !stacks[0].isEmpty))
             }
         }

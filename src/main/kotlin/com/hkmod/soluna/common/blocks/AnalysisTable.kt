@@ -132,12 +132,10 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
         builder.add(FACING, HAS_BOOK)
     }
 
-    override fun onRemove(pState: BlockState, pLevel: Level, pPos: BlockPos, pNewState: BlockState, pIsMoving: Boolean) {
-        if (!pState.`is`(pNewState.block)) {
-            if (pState.getValue(HAS_BOOK)) {
-                popBook(pState, pLevel, pPos)
-            }
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving)
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, isMoving: Boolean) {
+        if (!state.`is`(newState.block)) {
+            popBook(state, level, pos)
+            super.onRemove(state, level, pos, newState, isMoving)
         }
     }
 
@@ -172,7 +170,6 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
             val itemEntity = ItemEntity(level, pos.x + 0.5 + x, pos.y + 1.0, pos.z + 0.5 + z, itemStack)
             itemEntity.setDefaultPickUpDelay()
             level.addFreshEntity(itemEntity)
-            blockEntity.book = ItemStack.EMPTY
         } else {
             devException("There is block entity that's not AnalysisTableEntity at $pos!!")
             return
