@@ -17,15 +17,12 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.EntityBlock
-import net.minecraft.world.level.block.HorizontalDirectionalBlock
-import net.minecraft.world.level.block.Mirror
-import net.minecraft.world.level.block.RenderShape
-import net.minecraft.world.level.block.Rotation
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.BooleanProperty
+import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -36,18 +33,18 @@ import net.minecraftforge.fml.loading.FMLEnvironment
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
     companion object {
-        val FACING = HorizontalDirectionalBlock.FACING
-        val HAS_BOOK = BlockStateProperties.HAS_BOOK
+        val FACING: DirectionProperty = HorizontalDirectionalBlock.FACING
+        val HAS_BOOK: BooleanProperty = BlockStateProperties.HAS_BOOK
 
-        val SHAPE_BASE = box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0)
-        val SHAPE_POST = box(4.0, 2.0, 4.0, 12.0, 14.0, 12.0)
-        val SHAPE_COMMON = Shapes.or(SHAPE_BASE, SHAPE_POST)
-        val SHAPE_TOP_PLATE = box(0.0, 15.0, 0.0, 16.0, 15.0, 16.0)
-        val SHAPE_COLLISION = Shapes.or(SHAPE_COMMON, SHAPE_TOP_PLATE)
-        val SHAPE_WEST = Shapes.or(box(1.0, 10.0, 0.0, 5.333333, 14.0, 16.0), box(5.333333, 12.0, 0.0, 9.666667, 16.0, 16.0), box(9.666667, 14.0, 0.0, 14.0, 18.0, 16.0), SHAPE_COMMON)
-        val SHAPE_NORTH = Shapes.or(box(0.0, 10.0, 1.0, 16.0, 14.0, 5.333333), box(0.0, 12.0, 5.333333, 16.0, 16.0, 9.666667), box(0.0, 14.0, 9.666667, 16.0, 18.0, 14.0), SHAPE_COMMON)
-        val SHAPE_EAST = Shapes.or(box(10.666667, 10.0, 0.0, 15.0, 14.0, 16.0), box(6.333333, 12.0, 0.0, 10.666667, 16.0, 16.0), box(2.0, 14.0, 0.0, 6.333333, 18.0, 16.0), SHAPE_COMMON)
-        val SHAPE_SOUTH = Shapes.or(box(0.0, 10.0, 10.666667, 16.0, 14.0, 15.0), box(0.0, 12.0, 6.333333, 16.0, 16.0, 10.666667), box(0.0, 14.0, 2.0, 16.0, 18.0, 6.333333), SHAPE_COMMON)
+        private val SHAPE_BASE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0)
+        private val SHAPE_POST: VoxelShape = box(4.0, 2.0, 4.0, 12.0, 14.0, 12.0)
+        val SHAPE_COMMON: VoxelShape = Shapes.or(SHAPE_BASE, SHAPE_POST)
+        private val SHAPE_TOP_PLATE: VoxelShape = box(0.0, 15.0, 0.0, 16.0, 15.0, 16.0)
+        val SHAPE_COLLISION: VoxelShape = Shapes.or(SHAPE_COMMON, SHAPE_TOP_PLATE)
+        val SHAPE_WEST: VoxelShape = Shapes.or(box(1.0, 10.0, 0.0, 5.333333, 14.0, 16.0), box(5.333333, 12.0, 0.0, 9.666667, 16.0, 16.0), box(9.666667, 14.0, 0.0, 14.0, 18.0, 16.0), SHAPE_COMMON)
+        val SHAPE_NORTH: VoxelShape = Shapes.or(box(0.0, 10.0, 1.0, 16.0, 14.0, 5.333333), box(0.0, 12.0, 5.333333, 16.0, 16.0, 9.666667), box(0.0, 14.0, 9.666667, 16.0, 18.0, 14.0), SHAPE_COMMON)
+        val SHAPE_EAST: VoxelShape = Shapes.or(box(10.666667, 10.0, 0.0, 15.0, 14.0, 16.0), box(6.333333, 12.0, 0.0, 10.666667, 16.0, 16.0), box(2.0, 14.0, 0.0, 6.333333, 18.0, 16.0), SHAPE_COMMON)
+        val SHAPE_SOUTH: VoxelShape = Shapes.or(box(0.0, 10.0, 10.666667, 16.0, 14.0, 15.0), box(0.0, 12.0, 6.333333, 16.0, 16.0, 10.666667), box(0.0, 14.0, 2.0, 16.0, 18.0, 6.333333), SHAPE_COMMON)
     }
 
     init {
@@ -93,7 +90,7 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
     }
 
     /**
-     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
+     * The type of render function called. [RenderShape.MODEL] for mixed tesr and static model, [RenderShape.ENTITYBLOCK_ANIMATED] for TESR-only,
      * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
      */
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL

@@ -54,7 +54,7 @@ class AnalysisTableEntity(type: BlockEntityType<AnalysisTableEntity>, pos: Block
     fun getBook() = inventoryLazy.resolve().get().getStackInSlot(0)
 
     companion object {
-        val INVENTORY_CAP = CapabilityManager.get(object : CapabilityToken<IItemHandler>() {})
+        val INVENTORY_CAP: Capability<IItemHandler> = CapabilityManager.get(object : CapabilityToken<IItemHandler>() {})
     }
 
     override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
