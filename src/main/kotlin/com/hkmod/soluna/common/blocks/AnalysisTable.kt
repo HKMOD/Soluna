@@ -1,8 +1,8 @@
 package com.hkmod.soluna.common.blocks
 
-import com.hkmod.soluna.Soluna.LOGGER
 import com.hkmod.soluna.common.blocks.entity.AnalysisTableEntity
 import com.hkmod.soluna.common.blocks.entity.SolunaBlockEntities.ANALYSIS_TABLE_ENTITY
+import com.hkmod.soluna.common.util.devException
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
@@ -28,7 +28,6 @@ import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
-import net.minecraftforge.fml.loading.FMLEnvironment
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
@@ -74,13 +73,11 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
 
         val blockEntity = level.getBlockEntity(blockPos)
         if (blockEntity !is AnalysisTableEntity) {
-            if (!FMLEnvironment.production) {
-                LOGGER.warn("There is block entity that's not AnalysisTableEntity at $blockPos!!")
-                Thread.dumpStack()
-            }
+            devException("There is block entity that's not AnalysisTableEntity at $blockPos!!")
             return false
         }
-        if (!blockEntity.setBook(book.split(1))) return false
+
+        blockEntity.book = book.split(1)
 
         level.setBlock(blockPos, state.setValue(HAS_BOOK, true), 3)
         level.playSound(null, blockPos, SoundEvents.BOOK_PUT, SoundSource.BLOCKS, 1F, 1F)
@@ -106,7 +103,7 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
         var hasBook = false
         if (!level.isClientSide && player != null && player.canUseGameMasterBlocks()) {
             val tag = BlockItem.getBlockEntityData(itemStack)
-            if (tag != null && tag.contains("Book")) {
+            if (tag != null && tag.contains("book")) {
                 hasBook = true
             }
         }
@@ -152,15 +149,12 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
         val blockEntity = level.getBlockEntity(pos)
 
         if (blockEntity !is AnalysisTableEntity) {
-            if (!FMLEnvironment.production) {
-                LOGGER.warn("There is block entity that's not AnalysisTableEntity at $pos!!")
-                Thread.dumpStack()
-            }
+            devException("There is block entity that's not AnalysisTableEntity at $pos!!")
             return
         }
 
-        val book = blockEntity.getBook().copy()
-        blockEntity.setBook(ItemStack.EMPTY)
+        val book = blockEntity.book.copy()
+        blockEntity.book = ItemStack.EMPTY
         player.setItemInHand(pullHand, book)
         level.setBlock(pos, state.setValue(HAS_BOOK, false), 3)
     }
@@ -172,19 +166,15 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
         val blockEntity = level.getBlockEntity(pos)
         if (blockEntity is AnalysisTableEntity) {
             val direction = state.getValue(FACING)
-            val itemStack = blockEntity.getBook().copy()
+            val itemStack = blockEntity.book.copy()
             val x = 0.25F * direction.stepX
             val z = 0.25F * direction.stepZ
             val itemEntity = ItemEntity(level, pos.x + 0.5 + x, pos.y + 1.0, pos.z + 0.5 + z, itemStack)
             itemEntity.setDefaultPickUpDelay()
             level.addFreshEntity(itemEntity)
-            blockEntity.setBook(ItemStack.EMPTY)
-            level.setBlock(pos, state.setValue(HAS_BOOK, false), 3)
+            blockEntity.book = ItemStack.EMPTY
         } else {
-            if (!FMLEnvironment.production) {
-                LOGGER.warn("There is block entity that's not AnalysisTableEntity at $pos!!")
-                Thread.dumpStack()
-            }
+            devException("There is block entity that's not AnalysisTableEntity at $pos!!")
             return
         }
 
