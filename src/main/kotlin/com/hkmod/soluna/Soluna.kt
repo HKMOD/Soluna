@@ -5,9 +5,7 @@ import com.hkmod.soluna.client.renderer.registerRenderers
 import com.hkmod.soluna.common.blocks.SolunaBlocks
 import com.hkmod.soluna.common.blocks.entity.SolunaBlockEntities
 import com.hkmod.soluna.common.items.SolunaItems
-import net.minecraft.world.item.CreativeModeTab
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
+import com.hkmod.soluna.datagen.datagen
 import net.minecraftforge.fml.common.Mod
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
@@ -19,7 +17,7 @@ const val MODID = "soluna"
 
 @Mod(MODID)
 object Soluna {
-    private val LOGGER: Logger = LogManager.getLogger()
+    val LOGGER: Logger = LogManager.getLogger()
 
     init {
         LOGGER.log(Level.INFO, "$MODID has started!")
@@ -27,17 +25,11 @@ object Soluna {
         SolunaItems.registerItems(MOD_BUS)
         SolunaBlocks.registerBlocks(MOD_BUS)
         SolunaBlockEntities.registerBEs(MOD_BUS)
+        MOD_BUS.addListener(::datagen)
 
         if (DIST.isClient) {
             MOD_BUS.addListener(KeyBindings::registerKeybindings)
             MOD_BUS.addListener(::registerRenderers)
         }
     }
-}
-
-object SolunaTab : CreativeModeTab(-1, MODID) {
-    override fun makeIcon(): ItemStack {
-        return ItemStack(Items.DIAMOND)
-    }
-
 }

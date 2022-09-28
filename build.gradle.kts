@@ -124,9 +124,8 @@ minecraft.run {
 
         all {
             lazyToken("minecraft_classpath") {
-                val joined = configurations.getByName("library").copyRecursive().resolve()
+                return@lazyToken configurations.getByName("library").copyRecursive().resolve()
                     .joinToString(File.pathSeparator) { it.absolutePath }
-                return@lazyToken joined
             }
         }
     }
