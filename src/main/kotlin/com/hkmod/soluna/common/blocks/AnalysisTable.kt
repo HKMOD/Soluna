@@ -79,7 +79,6 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
 
         blockEntity.book = book.split(1)
 
-        level.setBlock(blockPos, state.setValue(HAS_BOOK, true), 3)
         level.playSound(null, blockPos, SoundEvents.BOOK_PUT, SoundSource.BLOCKS, 1F, 1F)
         level.playSound(null, blockPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 0.7F, 1.2F)
         level.gameEvent(player, GameEvent.BLOCK_CHANGE, blockPos)
@@ -154,7 +153,6 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
         val book = blockEntity.book.copy()
         blockEntity.book = ItemStack.EMPTY
         player.setItemInHand(pullHand, book)
-        level.setBlock(pos, state.setValue(HAS_BOOK, false), 3)
     }
 
     private fun popBook(state: BlockState, level: Level, pos: BlockPos) {
@@ -170,6 +168,7 @@ class AnalysisTable(properties: Properties) : Block(properties), EntityBlock {
             val itemEntity = ItemEntity(level, pos.x + 0.5 + x, pos.y + 1.0, pos.z + 0.5 + z, itemStack)
             itemEntity.setDefaultPickUpDelay()
             level.addFreshEntity(itemEntity)
+            blockEntity.book = ItemStack.EMPTY
         } else {
             devException("There is block entity that's not AnalysisTableEntity at $pos!!")
             return
