@@ -24,6 +24,7 @@
                     <!-- don't include the full logger name for Mojang's logs since they use full class names and it's very verbose -->
                     <PatternMatch key="net.minecraft.,com.mojang." pattern="%style{[%d{HH:mm:ss}]}{blue} %highlightForge{[%t/%level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=green, TRACE=blue} %style{(Minecraft)}{cyan} %highlightForge{%msg{nolookups}%n}{FATAL=red, ERROR=red, WARN=normal, INFO=normal, DEBUG=normal, TRACE=normal}"/>
                     <PatternMatch key="thedarkcolour.kotlinforforge." pattern="%style{[%d{HH:mm:ss}]}{blue} %highlightForge{[%t/%level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=green, TRACE=blue} %style{(KFF)}{cyan} %highlightForge{%msg{nolookups}%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=#ff9900, DEBUG=magenta, TRACE=magenta}"/>
+                    <PatternMatch key="com.hkmod.soluna." pattern="%style{[%d{HH:mm:ss}]}{blue} %highlightForge{[%t/%level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=green, TRACE=blue} %style{(Soluna)}{yellow} %highlightForge{%msg{nolookups}%n}{FATAL=red, ERROR=red, WARN=normal, INFO=normal, DEBUG=normal, TRACE=normal}"/>
                 </LoggerNamePatternSelector>
             </PatternLayout>
         </TerminalConsole>
