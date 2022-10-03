@@ -39,7 +39,7 @@ val Project.minecraft: MinecraftExtension
 
 minecraft.run {
 
-    mappings("parchment", "2022.08.14-1.19.2")
+    mappings("parchment", "2022.09.18-1.19.2")
 
     accessTransformer(file("src/main/resources/META-INF/accesstransformer.cfg"))
 
@@ -143,7 +143,7 @@ repositories {
 }
 
 dependencies {
-    minecraft("net.minecraftforge:forge:1.19.2-43.0.11")
+    minecraft("net.minecraftforge:forge:1.19.2-43.1.1")
 }
 
 sourceSets.main.configure {
